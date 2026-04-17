@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Massage Envy — Instagram, elevated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Massage Envy brand — periwinkle purple family, pulled from actual IG */
+  --purple:#6C6DE8;
+  --purple-deep:#4A4CD4;
+  --purple-ink:#2E2F8F;
+  --purple-lt:#9B9CF0;
+  --purple-soft:#F0F0FE;
+  --purple-mist:#F7F7FF;
+  --purple-100:#E5E5FD;
+
+  --ink:#14142B;
+  --ink-2:#3A3A5C;
+  --ink-3:#6E6E8C;
+  --ink-4:#A4A4B8;
+  --line:#E8E8F2;
+  --line-2:#F0F0F7;
+  --white:#FFFFFF;
+  --bg:#F5F5FA;
+  --peach:#FFE8DC;
+  --sage:#DDE8DC;
+
+  --display:'Fraunces',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;font-feature-settings:'cv11','ss01','ss03'}
+::selection{background:var(--purple);color:var(--white)}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* PAGE */
+.page{min-height:100vh;padding:64px 24px 96px;display:flex;flex-direction:column;align-items:center;gap:72px;background:
+  radial-gradient(1200px 600px at 10% -10%, rgba(108,109,232,.08), transparent 60%),
+  radial-gradient(900px 500px at 110% 20%, rgba(255,232,220,.5), transparent 60%),
+  var(--bg)}
+.page-head{text-align:center;max-width:720px}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple-deep);margin-bottom:20px;background:var(--purple-soft);padding:7px 16px;border-radius:100px;border:1px solid var(--purple-100)}
+.ph-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--purple);box-shadow:0 0 0 3px rgba(108,109,232,.18)}
+.ph-title{font-family:var(--display);font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.05;color:var(--ink);margin-bottom:18px;letter-spacing:-1.5px;font-variation-settings:'SOFT' 100,'opsz' 144}
+.ph-title em{font-style:italic;font-weight:300;color:var(--purple)}
+.ph-sub{font-size:16px;color:var(--ink-3);line-height:1.7;max-width:560px;margin:0 auto}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;max-width:1320px;width:100%;align-items:start}
+.column{display:flex;flex-direction:column;gap:20px}
+.column-label{display:flex;align-items:center;gap:12px;padding-left:2px}
+.column-label .num{font-family:var(--display);font-style:italic;font-weight:400;font-size:13px;color:var(--purple);width:26px;height:26px;border-radius:50%;background:var(--white);border:1px solid var(--purple-100);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px -4px rgba(74,76,212,.25)}
+.column-label .txt{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-2)}
+.column-label .hint{font-size:12px;color:var(--ink-4);margin-left:auto;font-style:italic;font-family:var(--display)}
+
+/* IG FRAME */
+.ig{background:var(--white);border-radius:28px;overflow:hidden;box-shadow:0 1px 2px rgba(20,20,43,.04),0 12px 32px -12px rgba(20,20,43,.12),0 40px 80px -30px rgba(74,76,212,.18);border:1px solid var(--line)}
+
+/* Top bar */
+.ig-top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line-2);background:var(--white)}
+.ig-top-handle{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.1px}
+.ig-top-handle .lock{width:14px;height:14px;color:var(--ink-3)}
+.ig-top-handle svg{display:block}
+.ig-top-handle .chev{width:14px;height:14px;color:var(--ink-2);margin-left:2px}
+.ig-top-icons{display:flex;gap:18px;color:var(--ink)}
+.ig-top-icons svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* Header */
+.ig-header{padding:26px 24px 10px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+.ig-avatar-shell{width:112px;height:112px;border-radius:50%;padding:2.5px;background:conic-gradient(from 140deg,#8B8CED,#6C6DE8,#4A4CD4,#9B9CF0,#6C6DE8);flex-shrink:0;box-shadow:0 10px 24px -8px rgba(74,76,212,.35)}
+.ig-avatar{width:100%;height:100%;border-radius:50%;background:var(--white);border:3.5px solid var(--white);display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;padding:8px}
+.ig-avatar .me-mark{font-family:var(--display);font-style:italic;font-weight:300;font-size:40px;color:var(--purple);letter-spacing:-2px;line-height:.9;font-variation-settings:'SOFT' 100,'opsz' 144}
+.ig-avatar .me-mark em{font-style:italic;color:var(--purple)}
+.ig-avatar .me-sub{font-family:var(--sans);font-size:7.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-top:2px}
+
+.ig-hr{display:flex;flex-direction:column;gap:16px;padding-top:6px}
+.ig-hr-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ig-username{font-size:21px;font-weight:500;color:var(--ink);letter-spacing:-.3px;display:flex;align-items:center;gap:6px;font-family:var(--display)}
+.ig-username .tick{width:16px;height:16px;color:var(--purple)}
+.ig-btn{padding:8px 18px;border-radius:10px;font-size:13.5px;font-weight:600;letter-spacing:-.1px;transition:all .2s;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;line-height:1}
+.ig-btn-primary{background:var(--purple);color:var(--white);box-shadow:0 2px 8px -2px rgba(108,109,232,.45)}
+.ig-btn-primary:hover{background:var(--purple-deep);box-shadow:0 4px 14px -3px rgba(74,76,212,.5);transform:translateY(-1px)}
+.ig-btn-ghost{background:var(--purple-soft);color:var(--ink);border:1px solid var(--purple-100)}
+.ig-btn-ghost:hover{background:var(--purple-100)}
+.ig-btn-icon{width:34px;height:34px;border-radius:10px;background:var(--purple-soft);border:1px solid var(--purple-100);display:inline-flex;align-items:center;justify-content:center}
+.ig-btn-icon svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2}
+.ig-btn-icon:hover{background:var(--purple-100)}
+
+.ig-stats{display:flex;gap:32px}
+.ig-stat{display:flex;align-items:baseline;gap:6px;font-size:14px;color:var(--ink-3)}
+.ig-stat b{font-family:var(--display);font-weight:500;font-size:17px;color:var(--ink);font-feature-settings:'tnum'}
+
+/* Bio */
+.ig-bio{padding:6px 24px 24px}
+.ig-bio-name{font-family:var(--display);font-size:18px;font-weight:500;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px}
+.ig-bio-category{font-size:11.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+.ig-bio-line{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.ig-bio-tag{font-family:var(--display);font-style:italic;font-size:18px;font-weight:400;color:var(--ink);margin:6px 0 12px;letter-spacing:-.2px}
+.ig-bio-tag em{font-style:italic;color:var(--purple);font-weight:500}
+.ig-bio-pin{font-size:14px;margin-right:4px}
+.ig-bio-links{display:flex;flex-direction:column;gap:6px;margin-top:12px;padding-top:14px;border-top:1px dashed var(--line)}
+.ig-bio-link{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--purple-deep);font-weight:500}
+.ig-bio-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.ig-bio-link span{text-decoration:underline;text-decoration-color:var(--purple-100);text-underline-offset:3px;transition:text-decoration-color .2s}
+.ig-bio-link:hover span{text-decoration-color:var(--purple)}
+
+/* Highlights */
+.ig-hl{display:flex;gap:22px;overflow-x:auto;padding:6px 24px 24px;scrollbar-width:none}
+.ig-hl::-webkit-scrollbar{display:none}
+.ig-hl-item{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;cursor:pointer;transition:transform .25s}
+.ig-hl-item:hover{transform:translateY(-2px)}
+.ig-hl-ring{width:76px;height:76px;border-radius:50%;padding:2.5px;background:linear-gradient(145deg,var(--purple-lt) 0%,var(--purple) 60%,var(--purple-deep) 100%);position:relative}
+.ig-hl-cover{width:100%;height:100%;border-radius:50%;background:var(--white);border:3px solid var(--white);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.ig-hl-cover::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),transparent 50%);pointer-events:none}
+.ig-hl-cover.is-faq{background:linear-gradient(145deg,#F7F7FF,#EDEDFE)}
+.ig-hl-cover.is-skin{background:linear-gradient(145deg,#FFF5F0,#FFE8DC)}
+.ig-hl-cover.is-self{background:linear-gradient(145deg,#F0F0FE,#E5E5FD)}
+.ig-hl-cover.is-mem{background:linear-gradient(145deg,#EEF5ED,#DDE8DC)}
+.ig-hl-cover.is-body{background:linear-gradient(145deg,#F5F5FA,#E8E8F2)}
+.ig-hl-cover.is-new{background:linear-gradient(145deg,var(--purple-lt),var(--purple))}
+.ig-hl-cover.is-promo{background:linear-gradient(145deg,#FFF5F0,#FFD9C2)}
+.ig-hl-cover svg{width:34px;height:34px;stroke:var(--purple-deep);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
+.ig-hl-cover.is-new svg{stroke:var(--white)}
+.ig-hl-label{font-size:12px;font-weight:500;color:var(--ink-2);letter-spacing:-.1px}
+
+/* Tabs */
+.ig-tabs{border-top:1px solid var(--line-2);display:flex;justify-content:center;gap:72px;padding:0}
+.ig-tab{display:flex;align-items:center;gap:8px;padding:14px 0;border-top:1.5px solid transparent;color:var(--ink-4);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:all .2s;margin-top:-1px;cursor:pointer}
+.ig-tab:hover{color:var(--ink-2)}
+.ig-tab.on{color:var(--purple-deep);border-top-color:var(--purple)}
+.ig-tab svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* Grid */
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--line-2)}
+.ig-cell{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--white)}
+.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.ig-cell:hover img{transform:scale(1.04)}
+.ig-cell .badge{position:absolute;top:10px;right:10px;color:var(--white);z-index:3;filter:drop-shadow(0 1px 2px rgba(20,20,43,.4))}
+.ig-cell .badge svg{width:17px;height:17px;fill:currentColor;stroke:currentColor;stroke-width:1}
+.ig-cell .hover{position:absolute;inset:0;background:rgba(74,76,212,.35);display:flex;align-items:center;justify-content:center;gap:24px;color:var(--white);opacity:0;transition:opacity .25s;backdrop-filter:blur(1px);z-index:2}
+.ig-cell:hover .hover{opacity:1}
+.ig-cell .hover-stat{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600}
+.ig-cell .hover-stat svg{width:16px;height:16px;fill:currentColor}
+
+/* Typography cards */
+.ig-cell.is-card{display:flex;flex-direction:column;padding:20px;text-align:left;justify-content:space-between}
+.ig-cell.is-card.v-purple{background:linear-gradient(155deg,var(--purple) 0%,var(--purple-deep) 100%);color:var(--white)}
+.ig-cell.is-card.v-soft{background:linear-gradient(155deg,var(--purple-soft),var(--purple-100));color:var(--ink)}
+.ig-cell.is-card.v-peach{background:linear-gradient(155deg,#FFF5F0,#FFE8DC);color:var(--ink)}
+.ig-cell.is-card.v-sage{background:linear-gradient(155deg,#EEF5ED,#DDE8DC);color:var(--ink)}
+.ig-cell.is-card.v-dark{background:linear-gradient(155deg,#22234D,#0F1033);color:var(--white)}
+.ig-cell.is-card .ccard-top{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.ig-cell.is-card .ccard-h{font-family:var(--display);font-weight:400;font-size:clamp(17px,2.2vw,24px);line-height:1.05;letter-spacing:-.4px}
+.ig-cell.is-card .ccard-h em{font-style:italic;font-weight:400}
+.ig-cell.is-card.v-purple .ccard-h em{color:#C6C7FA}
+.ig-cell.is-card.v-soft .ccard-h em,.ig-cell.is-card.v-peach .ccard-h em,.ig-cell.is-card.v-sage .ccard-h em{color:var(--purple)}
+.ig-cell.is-card .ccard-foot{font-size:11px;font-weight:500;opacity:.6;display:flex;align-items:center;gap:4px}
+.ig-cell.is-card .ccard-mark{position:absolute;bottom:14px;right:14px;font-family:var(--display);font-style:italic;font-size:14px;opacity:.5}
+
+/* Purple tint */
+.ig-cell.tinted::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(74,76,212,.02),rgba(74,76,212,.22));mix-blend-mode:multiply;z-index:1;pointer-events:none}
+
+/* Bottom bar */
+.ig-bottom{display:flex;justify-content:space-around;align-items:center;padding:14px 0;border-top:1px solid var(--line-2);background:var(--white)}
+.ig-bottom svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ig-bottom .avatar-sm{width:24px;height:24px;border-radius:50%;background:linear-gradient(145deg,var(--purple-lt),var(--purple));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:10px;font-weight:500;font-style:italic;color:var(--white);border:1.5px solid var(--ink)}
+
+/* POST CARD */
+.ig-post .ig-post-head{padding:12px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line-2)}
+.ig-post-avatar{width:38px;height:38px;border-radius:50%;padding:1.5px;background:linear-gradient(145deg,var(--purple-lt),var(--purple),var(--purple-deep));flex-shrink:0}
+.ig-post-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--white);border:1.5px solid var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-size:16px;font-weight:300;color:var(--purple);letter-spacing:-1px}
+.ig-post-user{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0}
+.ig-post-username{font-size:14.5px;font-weight:600;color:var(--ink);letter-spacing:-.2px;display:flex;align-items:center;gap:5px}
+.ig-post-username .tick{width:12px;height:12px;color:var(--purple)}
+.ig-post-location{font-size:12px;color:var(--ink-3);font-weight:400}
+.ig-post-more{color:var(--ink);padding:4px}
+.ig-post-more svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+.ig-post-media{position:relative;aspect-ratio:1;background:var(--ink);overflow:hidden}
+.ig-post-media img{width:100%;height:100%;object-fit:cover}
+.ig-post-media .pill{position:absolute;top:14px;right:14px;background:rgba(20,20,43,.65);color:var(--white);font-size:11.5px;font-weight:600;letter-spacing:-.1px;padding:5px 12px;border-radius:100px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;gap:5px}
+.ig-post-media .pill svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.ig-post-media .overlay-text{position:absolute;inset:0;display:flex;align-items:flex-end;padding:32px;background:linear-gradient(180deg,transparent 40%,rgba(20,20,43,.65) 100%);color:var(--white)}
+.ig-post-media .overlay-text .ot-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C6C7FA;margin-bottom:8px}
+.ig-post-media .overlay-text .ot-h{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.7px;max-width:85%}
+.ig-post-media .overlay-text .ot-h em{font-style:italic;color:#C6C7FA}
+
+.ig-post-actions{padding:10px 16px 4px;display:flex;justify-content:space-between;align-items:center}
+.ig-post-actions-l{display:flex;gap:18px}
+.ig-post-actions svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;cursor:pointer;transition:all .2s}
+.ig-post-actions svg:hover{transform:scale(1.08)}
+.ig-post-actions .liked{fill:var(--purple);stroke:var(--purple)}
+
+.ig-post-dots{display:flex;gap:5px;justify-content:center;padding:4px 0}
+.ig-post-dots .d{width:5px;height:5px;border-radius:50%;background:var(--ink-4);opacity:.35}
+.ig-post-dots .d.on{background:var(--purple);opacity:1}
+
+.ig-post-meta{padding:6px 16px 16px}
+.ig-post-likes{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-.1px}
+.ig-post-caption{font-size:14px;line-height:1.55;color:var(--ink)}
+.ig-post-caption .handle{font-weight:600;margin-right:6px;letter-spacing:-.2px}
+.ig-post-caption .tag{color:var(--purple-deep);font-weight:500}
+.ig-post-caption em{font-family:var(--display);font-style:italic;font-weight:400;color:var(--purple-deep)}
+.ig-post-comments{font-size:13px;color:var(--ink-3);margin-top:8px;cursor:pointer}
+.ig-post-comments:hover{color:var(--ink-2)}
+.ig-post-time{font-size:10.5px;color:var(--ink-4);letter-spacing:1px;text-transform:uppercase;margin-top:10px;font-weight:500}
+
+/* COMPARISON */
+.compare{max-width:1320px;width:100%;background:var(--white);border-radius:28px;padding:44px 48px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(20,20,43,.04),0 20px 50px -20px rgba(20,20,43,.08)}
+.compare-head{text-align:center;margin-bottom:32px}
+.compare-head .l{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple-deep);margin-bottom:10px}
+.compare-head .t{font-family:var(--display);font-size:30px;font-weight:400;color:var(--ink);letter-spacing:-.8px}
+.compare-head .t em{font-style:italic;color:var(--purple)}
+.compare-head .s{font-size:14px;color:var(--ink-3);margin-top:8px;max-width:480px;margin-left:auto;margin-right:auto}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.comp-card{background:var(--purple-mist);border:1px solid var(--purple-100);border-radius:20px;padding:26px}
+.comp-card .cc-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.comp-card .cc-label .n{width:20px;height:20px;border-radius:50%;background:var(--purple);color:var(--white);display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-size:11px;font-style:italic;font-weight:500}
+.comp-card .cc-h{font-family:var(--display);font-size:18px;font-weight:500;color:var(--ink);letter-spacing:-.3px;margin-bottom:8px;line-height:1.25}
+.comp-card .cc-h em{font-style:italic;color:var(--purple)}
+.comp-card .cc-text{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+
+/* PALETTE */
+.palette{max-width:1320px;width:100%;background:var(--white);border-radius:28px;padding:44px 48px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(20,20,43,.04),0 20px 50px -20px rgba(20,20,43,.08)}
+.palette-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px;flex-wrap:wrap;gap:16px}
+.palette-head .l{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple-deep);margin-bottom:6px}
+.palette-head .t{font-family:var(--display);font-size:28px;font-weight:400;color:var(--ink);letter-spacing:-.7px}
+.palette-head .t em{font-style:italic;color:var(--purple)}
+.palette-head .note{font-size:13px;color:var(--ink-3);font-style:italic;font-family:var(--display)}
+.palette-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.sw{display:flex;flex-direction:column;gap:10px}
+.sw .chip{aspect-ratio:1;border-radius:16px;border:1px solid rgba(0,0,0,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.sw .name{font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink);letter-spacing:-.2px}
+.sw .hex{font-size:11px;color:var(--ink-4);letter-spacing:.3px;font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
+
+.type-specimen{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid var(--line)}
+.ts-item{padding:22px;border-radius:16px;background:var(--purple-mist);border:1px solid var(--purple-100)}
+.ts-item .ts-l{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple);margin-bottom:12px}
+.ts-item .ts-preview{margin-bottom:14px}
+.ts-item .ts-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-3);padding-top:12px;border-top:1px dashed var(--purple-100)}
+.ts-item .ts-meta span{font-weight:500;color:var(--ink-2)}
+.ts-display{font-family:var(--display);font-size:36px;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-1px}
+.ts-display em{font-style:italic;color:var(--purple)}
+.ts-body{font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .layout{grid-template-columns:1fr;gap:36px;max-width:520px}
+  .page{padding:40px 16px 80px;gap:48px}
+  .compare,.palette{padding:32px 24px;border-radius:20px}
+  .palette-grid{grid-template-columns:repeat(3,1fr)}
+  .compare-grid{grid-template-columns:1fr}
+  .type-specimen{grid-template-columns:1fr}
+  .ig-header{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .ig-hr{align-items:center}
+  .ig-stats{justify-content:center}
+  .ig-tabs{gap:40px}
+}
+@media(max-width:480px){
+  .ig-hl{gap:18px;padding:6px 16px 20px}
+  .ig-hl-ring{width:66px;height:66px}
+  .ig-hl-cover svg{width:28px;height:28px}
+  .ig-header{padding:22px 16px 6px;gap:22px}
+  .ig-bio{padding:4px 16px 20px}
+  .palette-grid{grid-template-columns:repeat(2,1fr)}
+  .ig-post-media .overlay-text{padding:22px}
+  .ig-post-media .overlay-text .ot-h{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-head">
+    <div class="ph-eyebrow"><span class="dot"></span>Brand concept · April 2026</div>
+    <h1 class="ph-title">Massage Envy on Instagram, <em>elevated.</em></h1>
+    <p class="ph-sub">A considered take on the Massage Envy social presence — grounded in the brand's signature periwinkle purple, but with editorial typography, refined content pillars, and a grid that mixes photography with type-led moments.</p>
+  </div>
+
+  <div class="layout">
+
+    <!-- PROFILE -->
+    <div class="column">
+      <div class="column-label">
+        <span class="num">1</span>
+        <span class="txt">Profile</span>
+        <span class="hint">Desktop + mobile web</span>
+      </div>
+
+      <div class="ig ig-profile">
+        <div class="ig-top">
+          <div class="ig-top-handle">
+            <svg class="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <span>massageenvy</span>
+            <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="ig-top-icons">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-avatar-shell">
+            <div class="ig-avatar">
+              <div class="me-mark">M<em>e</em></div>
+              <div class="me-sub">Massage Envy</div>
+            </div>
+          </div>
+          <div class="ig-hr">
+            <div class="ig-hr-row">
+              <span class="ig-username">massageenvy
+                <svg class="tick" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.2-.4.9 3.1 3 1.1-1.1 3 1.4 2.9-2.6 1.9-.2 3.2-3.2.4L12 22l-2.4-2.1-3.2.4-.9-3.1-3-1.1 1.1-3L2.2 12l2.6-1.9.2-3.2 3.2-.4L12 2zm-1.2 11.6l5.3-5.3-1.4-1.4-3.9 3.9-1.7-1.7-1.4 1.4 3.1 3.1z"/></svg>
+              </span>
+              <button class="ig-btn ig-btn-primary">Follow</button>
+              <button class="ig-btn ig-btn-ghost">Message</button>
+              <button class="ig-btn-icon" aria-label="Suggested">
+                <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              </button>
+            </div>
+            <div class="ig-stats">
+              <div class="ig-stat"><b>1,910</b> posts</div>
+              <div class="ig-stat"><b>58.4K</b> followers</div>
+              <div class="ig-stat"><b>584</b> following</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-bio">
+          <div class="ig-bio-name">Massage Envy</div>
+          <div class="ig-bio-category">Health & Beauty · Wellness</div>
+          <div class="ig-bio-tag">Results-driven body & skin care — <em>where better begins.</em></div>
+          <div class="ig-bio-line"><span class="ig-bio-pin">📍</span> Book your appointment below</div>
+          <div class="ig-bio-links">
+            <a href="#" class="ig-bio-link">
+              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span>linktr.ee/massageenvy</span>
+            </a>
+            <a href="#" class="ig-bio-link">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="3.5" y1="12" x2="20.5" y2="12"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg>
+              <span>massageenvy.com</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="ig-hl">
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-faq">
+              <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+            </div></div>
+            <span class="ig-hl-label">FAQs</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-skin">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="5"/><path d="M7 21c0-3 2-5 5-5s5 2 5 5"/></svg>
+            </div></div>
+            <span class="ig-hl-label">Skin Care</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-self">
+              <svg viewBox="0 0 24 24"><path d="M12 2l1.5 4.5 4.5 1.5-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/><path d="M5 16l1 2.5 2.5 1-2.5 1L5 23l-1-2.5-2.5-1 2.5-1L5 16z"/><path d="M19 14l.8 2 2 .8-2 .8L19 19.6l-.8-2-2-.8 2-.8.8-2z"/></svg>
+            </div></div>
+            <span class="ig-hl-label">Self-Care</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-mem">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><line x1="3" y1="11" x2="21" y2="11"/><line x1="7" y1="15" x2="11" y2="15"/></svg>
+            </div></div>
+            <span class="ig-hl-label">Membership</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-body">
+              <svg viewBox="0 0 24 24"><path d="M4 18c3-2 5-3 8-3s5 1 8 3"/><path d="M7 12c1-.5 2.5-1 5-1s4 .5 5 1"/><path d="M9 8c1-.5 1.5-1 3-1s2 .5 3 1"/></svg>
+            </div></div>
+            <span class="ig-hl-label">Body Care</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-promo">
+              <svg viewBox="0 0 24 24"><path d="M20.6 7.6 12 3 3.4 7.6"/><path d="M3.4 7.6V16L12 20.6l8.6-4.6V7.6"/><path d="M12 12v8.6M3.4 7.6 12 12l8.6-4.4"/></svg>
+            </div></div>
+            <span class="ig-hl-label">Offers</span>
+          </div>
+          <div class="ig-hl-item">
+            <div class="ig-hl-ring"><div class="ig-hl-cover is-new">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+            </div></div>
+            <span class="ig-hl-label">What's New</span>
+          </div>
+        </div>
+
+        <div class="ig-tabs">
+          <div class="ig-tab on">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Posts
+          </div>
+          <div class="ig-tab">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 15 12 10 15 10 9" fill="currentColor" stroke="none"/></svg>
+            Reels
+          </div>
+          <div class="ig-tab">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v16l4-4h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/><circle cx="12" cy="11" r="3"/></svg>
+            Tagged
+          </div>
+        </div>
+
+        <div class="ig-grid">
+          <div class="ig-cell is-card v-purple">
+            <div class="ccard-top">Monday reset</div>
+            <div class="ccard-h">Better <em>begins</em> with one deep breath.</div>
+            <span class="ccard-mark">Me.</span>
+          </div>
+          <div class="ig-cell tinted">
+            <span class="badge"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM20 6l2-2h-4l2 2zM8 8l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <img src="../images/face-golden-glow.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>2.1K</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>87</div>
+            </div>
+          </div>
+          <div class="ig-cell">
+            <span class="badge"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
+            <img src="../images/hot-stone-massage.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>3.4K</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>124</div>
+            </div>
+          </div>
+
+          <div class="ig-cell">
+            <img src="../images/essential-oil-drops.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>962</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>31</div>
+            </div>
+          </div>
+          <div class="ig-cell is-card v-peach">
+            <div class="ccard-top">Skin Series · 01</div>
+            <div class="ccard-h">The glow is <em>earned</em>, not filtered.</div>
+            <div class="ccard-foot">Swipe for 4 tips →</div>
+          </div>
+          <div class="ig-cell tinted">
+            <span class="badge"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM20 6l2-2h-4l2 2zM8 8l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <img src="../images/facial-massage-warm.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>1.3K</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>46</div>
+            </div>
+          </div>
+
+          <div class="ig-cell">
+            <img src="../images/towels-candle-brush.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>1.1K</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>38</div>
+            </div>
+          </div>
+          <div class="ig-cell is-card v-dark">
+            <div class="ccard-top">Member spotlight</div>
+            <div class="ccard-h">"I book the hour I <em>need</em>, not the one I can spare."</div>
+            <div class="ccard-foot">— Mia · member since '22</div>
+          </div>
+          <div class="ig-cell">
+            <span class="badge"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
+            <img src="../images/water-ripples-dark.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>4.1K</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>156</div>
+            </div>
+          </div>
+
+          <div class="ig-cell is-card v-sage">
+            <div class="ccard-top">Ask a therapist</div>
+            <div class="ccard-h">Why your shoulders <em>keep coming back.</em></div>
+            <div class="ccard-foot">Tap for Reels →</div>
+          </div>
+          <div class="ig-cell">
+            <img src="../images/diffuser-candle-towel.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>845</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>22</div>
+            </div>
+          </div>
+          <div class="ig-cell tinted">
+            <img src="../images/spa-flatlay-tools.jpg" alt="">
+            <div class="hover">
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>674</div>
+              <div class="hover-stat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>19</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-bottom">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 15 12 10 15 10 9" fill="currentColor" stroke="none"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <div class="avatar-sm">M<em>e</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTS -->
+    <div class="column">
+      <div class="column-label">
+        <span class="num">2</span>
+        <span class="txt">Feed posts</span>
+        <span class="hint">Editorial content pillars</span>
+      </div>
+
+      <div class="ig ig-post">
+        <div class="ig-post-head">
+          <div class="ig-post-avatar"><div class="ig-post-avatar-inner">M<em>e</em></div></div>
+          <div class="ig-post-user">
+            <div class="ig-post-username">massageenvy
+              <svg class="tick" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.2-.4.9 3.1 3 1.1-1.1 3 1.4 2.9-2.6 1.9-.2 3.2-3.2.4L12 22l-2.4-2.1-3.2.4-.9-3.1-3-1.1 1.1-3L2.2 12l2.6-1.9.2-3.2 3.2-.4L12 2zm-1.2 11.6l5.3-5.3-1.4-1.4-3.9 3.9-1.7-1.7-1.4 1.4 3.1 3.1z"/></svg>
+            </div>
+            <div class="ig-post-location">Sponsored · Franchise network</div>
+          </div>
+          <button class="ig-post-more" aria-label="More">
+            <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="ig-post-media">
+          <img src="../images/face-golden-glow.jpg" alt="Facial glow">
+          <div class="pill"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>1 / 4</div>
+          <div class="overlay-text">
+            <div>
+              <div class="ot-eyebrow">Skin Series · 01</div>
+              <div class="ot-h">The glow is <em>earned,</em><br>not filtered.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ig-post-actions">
+          <div class="ig-post-actions-l">
+            <svg class="liked" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+          <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ig-post-dots">
+          <span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span>
+        </div>
+        <div class="ig-post-meta">
+          <div class="ig-post-likes">2,108 likes</div>
+          <div class="ig-post-caption">
+            <span class="handle">massageenvy</span>
+            Results-driven facials that work with your skin, not against it. Four things your skin wishes you knew — <em>swipe to keep going.</em> <span class="tag">#WhereBetterBegins</span> <span class="tag">#SkinCare</span>
+          </div>
+          <div class="ig-post-comments">View all 87 comments</div>
+          <div class="ig-post-time">6 hours ago</div>
+        </div>
+      </div>
+
+      <div class="ig ig-post">
+        <div class="ig-post-head">
+          <div class="ig-post-avatar"><div class="ig-post-avatar-inner">M<em>e</em></div></div>
+          <div class="ig-post-user">
+            <div class="ig-post-username">massageenvy
+              <svg class="tick" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.2-.4.9 3.1 3 1.1-1.1 3 1.4 2.9-2.6 1.9-.2 3.2-3.2.4L12 22l-2.4-2.1-3.2.4-.9-3.1-3-1.1 1.1-3L2.2 12l2.6-1.9.2-3.2 3.2-.4L12 2zm-1.2 11.6l5.3-5.3-1.4-1.4-3.9 3.9-1.7-1.7-1.4 1.4 3.1 3.1z"/></svg>
+            </div>
+            <div class="ig-post-location">Monday reset</div>
+          </div>
+          <button class="ig-post-more" aria-label="More">
+            <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="ig-post-media" style="background:linear-gradient(155deg,var(--purple) 0%,var(--purple-deep) 100%);display:flex;align-items:center;justify-content:center;padding:48px">
+          <div style="text-align:center;color:var(--white);max-width:420px">
+            <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C6C7FA;margin-bottom:22px">Monday, inhale.</div>
+            <div style="font-family:var(--display);font-weight:300;font-size:38px;line-height:1.08;letter-spacing:-1px;margin-bottom:22px">Better <em style="color:#C6C7FA;font-weight:400">begins</em> with one<br>deep <em style="color:#C6C7FA;font-weight:400">breath.</em></div>
+            <div style="font-family:var(--display);font-style:italic;font-size:16px;color:#C6C7FA;opacity:.9">— Massage Envy</div>
+          </div>
+        </div>
+        <div class="ig-post-actions">
+          <div class="ig-post-actions-l">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+          <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ig-post-meta">
+          <div class="ig-post-likes">5,420 likes</div>
+          <div class="ig-post-caption">
+            <span class="handle">massageenvy</span>
+            A gentle reminder for your Monday. Book the reset you've been putting off — link in bio. <em>Where better begins.</em> <span class="tag">#SelfCare</span> <span class="tag">#MondayMood</span>
+          </div>
+          <div class="ig-post-comments">View all 203 comments</div>
+          <div class="ig-post-time">1 day ago</div>
+        </div>
+      </div>
+
+      <div class="ig ig-post">
+        <div class="ig-post-head">
+          <div class="ig-post-avatar"><div class="ig-post-avatar-inner">M<em>e</em></div></div>
+          <div class="ig-post-user">
+            <div class="ig-post-username">massageenvy
+              <svg class="tick" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.2-.4.9 3.1 3 1.1-1.1 3 1.4 2.9-2.6 1.9-.2 3.2-3.2.4L12 22l-2.4-2.1-3.2.4-.9-3.1-3-1.1 1.1-3L2.2 12l2.6-1.9.2-3.2 3.2-.4L12 2zm-1.2 11.6l5.3-5.3-1.4-1.4-3.9 3.9-1.7-1.7-1.4 1.4 3.1 3.1z"/></svg>
+            </div>
+            <div class="ig-post-location">Reel · Ask a therapist</div>
+          </div>
+          <button class="ig-post-more" aria-label="More">
+            <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="ig-post-media">
+          <img src="../images/hot-stone-massage.jpg" alt="Hot stone massage">
+          <div class="pill"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg>Reel</div>
+          <div class="overlay-text">
+            <div>
+              <div class="ot-eyebrow">Ask a therapist · 04</div>
+              <div class="ot-h">Why your shoulders<br><em>keep coming back.</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="ig-post-actions">
+          <div class="ig-post-actions-l">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+          <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ig-post-meta">
+          <div class="ig-post-likes">3,402 likes · 124K plays</div>
+          <div class="ig-post-caption">
+            <span class="handle">massageenvy</span>
+            If the tension always <em>returns</em>, it's rarely about the muscle. Our LMTs explain the four most-missed reasons — and what to ask for at your next visit. <span class="tag">#AskATherapist</span>
+          </div>
+          <div class="ig-post-comments">View all 156 comments</div>
+          <div class="ig-post-time">2 days ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-head">
+      <div class="l">What changed</div>
+      <div class="t">Three moves to <em>elevate</em> the feed</div>
+      <div class="s">Same brand. Same purple. Same "Me." — but with a point of view that earns the follow.</div>
+    </div>
+    <div class="compare-grid">
+      <div class="comp-card">
+        <div class="cc-label"><span class="n">1</span> Editorial type</div>
+        <div class="cc-h">Fraunces + Inter, in <em>conversation.</em></div>
+        <div class="cc-text">A serif with a soft italic axis for headlines and quote moments, paired with a neutral sans for UI. Makes every post feel designed, not defaulted.</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-label"><span class="n">2</span> Mixed grid</div>
+        <div class="cc-h">Photo, <em>quote,</em> tip, product.</div>
+        <div class="cc-text">Four content pillars weave through the grid — breaking up photo-heavy rows with typography cards, member quotes, and therapist tips so followers always find something new.</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-label"><span class="n">3</span> Unified palette</div>
+        <div class="cc-h">Periwinkle, <em>soft peach, sage.</em></div>
+        <div class="cc-text">The brand purple stays dominant, with warm accent tones (peach, sage, ink) reserved for content pillars. Every photo gets a subtle purple grade so the grid reads as one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette">
+    <div class="palette-head">
+      <div>
+        <div class="l">Design tokens</div>
+        <div class="t">Palette & <em>type</em></div>
+      </div>
+      <div class="note">Everything is already in the brand — just pulled forward.</div>
+    </div>
+    <div class="palette-grid">
+      <div class="sw"><div class="chip" style="background:#6C6DE8"></div><div class="name">Periwinkle</div><div class="hex">#6C6DE8</div></div>
+      <div class="sw"><div class="chip" style="background:#4A4CD4"></div><div class="name">Deep violet</div><div class="hex">#4A4CD4</div></div>
+      <div class="sw"><div class="chip" style="background:#F0F0FE"></div><div class="name">Soft purple</div><div class="hex">#F0F0FE</div></div>
+      <div class="sw"><div class="chip" style="background:#FFE8DC"></div><div class="name">Warm peach</div><div class="hex">#FFE8DC</div></div>
+      <div class="sw"><div class="chip" style="background:#DDE8DC"></div><div class="name">Calm sage</div><div class="hex">#DDE8DC</div></div>
+      <div class="sw"><div class="chip" style="background:#14142B"></div><div class="name">Ink</div><div class="hex">#14142B</div></div>
+    </div>
+    <div class="type-specimen">
+      <div class="ts-item">
+        <div class="ts-l">Display · Headlines & quotes</div>
+        <div class="ts-preview"><div class="ts-display">Where <em>better</em> begins.</div></div>
+        <div class="ts-meta"><span>Fraunces</span><span>Variable · Italic axis</span></div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-l">Body · UI & captions</div>
+        <div class="ts-preview"><div class="ts-body">Results-driven facials, therapeutic massage, and membership pricing that makes self-care a rhythm, not a reward.</div></div>
+        <div class="ts-meta"><span>Inter</span><span>300 – 700</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
